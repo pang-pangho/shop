@@ -13,10 +13,8 @@ const Form = ({ title, getDataForm, firebaseError }) => {
 
   // 폼 제출 함수
   const onSubmit = ({ email, password }) => {
-    if (getDataForm) {
-      getDataForm(email, password);
-      reset();
-    }
+    getDataForm(email, password);
+    reset();
   };
 
   const userEmail = {
@@ -31,8 +29,8 @@ const Form = ({ title, getDataForm, firebaseError }) => {
   const userPassword = {
     required: "필수 필드입니다.",
     minLength: {
-      value: 4,
-      message: "최소 4자입니다.",
+      value: 6,
+      message: "최소 6자입니다.",
     },
   };
 
@@ -46,7 +44,7 @@ const Form = ({ title, getDataForm, firebaseError }) => {
         />
         {errors?.email && (
           <div>
-            <span className={styles.error}>{errors.email.message}</span>
+            <span className={styles.form_error}>{errors.email.message}</span>
           </div>
         )}
       </div>
@@ -59,18 +57,15 @@ const Form = ({ title, getDataForm, firebaseError }) => {
         />
         {errors?.password && (
           <div>
-            <span className={styles.error}>{errors.password.message}</span>
+            <span className={styles.form_error}>{errors.password.message}</span>
           </div>
         )}
       </div>
+      <button type="submit">{title}</button>
 
       {firebaseError && (
-        <div>
-          <span className={styles.error}>{firebaseError}</span>
-        </div>
+        <span className={styles.form_error}>{firebaseError}</span>
       )}
-
-      <button type="submit">{title}</button>
     </form>
   );
 };
